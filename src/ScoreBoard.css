@@ -1,0 +1,9 @@
+#score-grid {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-element {
+  border: 1px solid white;
+}

@@ -3,33 +3,27 @@ import { useEffect, useState } from "react";
 function DuckCard() {
   const [duckImg, setDuckImg] = useState();
 
-  async function fetchDuckImg() {
-    const response = await fetch("https://random-d.uk/api/randomimg", {
-      mode: "no-cors",
-    });
-    if (!response.ok) {
-      throw new Error("Network response not ok");
-    }
-    const blob = await response.blob();
-    const localObjectUrl = URL.createObjectURL(blob);
-    setDuckImg(localObjectUrl);
-  }
+  const apiKey = "EctaRGZPR0oVfEiBWP1Q1QHpVTwfgy1u";
+  const tag = "duck";
+  const rating = "g";
+  const url = `https://api.giphy.com/v1/gifs/random?api_key=${apiKey}&tag=${tag}&rating=${rating}`;
 
-  async function fetchRandomDuck() {
-    try {
-      const response = await fetch(
-        "https://cors-anywhere.herokuapp.com/https://random-d.uk/api/random"
-      );
-      const data = await response.json();
-      const duckImageUrl = data.url;
-      setDuckImg(duckImageUrl);
-    } catch (error) {
-      console.error("Error fetching the duck image:", error);
-    }
+  async function fetchDuckImg() {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        // Check if the data key is in the response JSON
+        const stillImgUrl = data.data.images.fixed_height_still.url;
+        console.log(stillImgUrl);
+
+        // Optionally, display the GIFs in the HTML document
+        setDuckImg(stillImgUrl);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
   }
 
   useEffect(() => {
-    fetchRandomDuck();
+    fetchDuckImg();
   }, []);
 
   return (

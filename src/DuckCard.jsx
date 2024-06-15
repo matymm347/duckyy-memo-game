@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import "./DuckCard.css";
 
 function DuckCard() {
   const [duckImg, setDuckImg] = useState();
+  const hasFetched = useRef(false);
 
   const apiKey = "EctaRGZPR0oVfEiBWP1Q1QHpVTwfgy1u";
   const tag = "duck";
@@ -12,24 +14,33 @@ function DuckCard() {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        // Check if the data key is in the response JSON
         const stillImgUrl = data.data.images.fixed_height_still.url;
-        console.log(stillImgUrl);
-
-        // Optionally, display the GIFs in the HTML document
         setDuckImg(stillImgUrl);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }
 
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
     fetchDuckImg();
   }, []);
 
   return (
     <>
-      <div className="duckCard">
-        <img src={duckImg} alt="DuckyyImg" />
+      <div className="duck-card">
+        <img
+          className="duck-img"
+          src={duckImg}
+          alt="DuckyyImg"
+          style={{
+            width: "200px",
+            height: "200px",
+            objectFit: "cover",
+            borderRadius: "10px",
+            overflow: "hidden",
+          }}
+        />
       </div>
     </>
   );

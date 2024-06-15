@@ -1,7 +1,12 @@
-.duck-img {
+.duck-img-not-clicked {
   outline: 2px solid white;
 }
 
-.duck-img:hover {
+.duck-img-clicked {
+  outline: none;
+}
+
+.duck-img-clicked:hover,
+.duck-img-not-clicked:hover {
   outline: 5px solid yellow;
 }

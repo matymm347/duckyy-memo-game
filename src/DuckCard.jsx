@@ -3,6 +3,7 @@ import "./DuckCard.css";
 
 function DuckCard() {
   const [duckImg, setDuckImg] = useState();
+  const [clicked, setClicked] = useState(false);
   const hasFetched = useRef(false);
 
   const apiKey = "EctaRGZPR0oVfEiBWP1Q1QHpVTwfgy1u";
@@ -26,11 +27,23 @@ function DuckCard() {
     fetchDuckImg();
   }, []);
 
+  const handleClick = () => {
+    setClicked(true);
+  };
+
+  let cardStyle = "";
+
+  if (clicked) {
+    cardStyle = "duck-img-clicked";
+  } else if (!clicked) {
+    cardStyle = "duck-img-not-clicked";
+  }
+
   return (
     <>
-      <div className="duck-card">
+      <div onClick={handleClick} className="duck-card">
         <img
-          className="duck-img"
+          className={cardStyle}
           src={duckImg}
           alt="DuckyyImg"
           style={{

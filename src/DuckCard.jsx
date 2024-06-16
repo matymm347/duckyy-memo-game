@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from "react";
+import PropTypes from "prop-types";
 import "./DuckCard.css";
 
-function DuckCard() {
+function DuckCard({ scoreUpdateHandler }) {
   const [duckImg, setDuckImg] = useState();
   const [clicked, setClicked] = useState(false);
   const hasFetched = useRef(false);
@@ -23,12 +24,18 @@ function DuckCard() {
 
   useEffect(() => {
     if (hasFetched.current) return;
-    hasFetched.current = true;
     fetchDuckImg();
+    hasFetched.current = true;
   }, []);
 
   const handleClick = () => {
-    setClicked(true);
+    if (clicked === false) {
+      setClicked(true);
+      scoreUpdateHandler("raise");
+    } else if (clicked === true) {
+      setClicked(false);
+      scoreUpdateHandler("reset");
+    }
   };
 
   let cardStyle = "";
@@ -58,5 +65,9 @@ function DuckCard() {
     </>
   );
 }
+
+DuckCard.propTypes = {
+  scoreUpdateHandler: PropTypes.func,
+};
 
 export { DuckCard };

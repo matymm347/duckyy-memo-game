@@ -1,10 +1,11 @@
 import { DuckCard } from "./DuckCard";
 import { v4 as uuidv4 } from "uuid";
+import PropTypes from "prop-types";
 import "./CardsBoard.css";
 
-function CardsBoard({ cardCount }) {
+function CardsBoard({ cardCount, scoreUpdateHandler }) {
   const duckCardList = Array.from({ length: cardCount }, () => (
-    <DuckCard key={uuidv4()} />
+    <DuckCard scoreUpdateHandler={scoreUpdateHandler} key={uuidv4()} />
   ));
 
   return (
@@ -13,5 +14,10 @@ function CardsBoard({ cardCount }) {
     </>
   );
 }
+
+CardsBoard.propTypes = {
+  cardCount: PropTypes.number,
+  scoreUpdateHandler: PropTypes.func,
+};
 
 export { CardsBoard };

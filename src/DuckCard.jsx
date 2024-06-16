@@ -1,9 +1,9 @@
-import { useEffect, useState, useRef } from "react";
+import { React, useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "./DuckCard.css";
 
 function DuckCard({ scoreUpdateHandler }) {
-  const [duckImg, setDuckImg] = useState();
+  const [duckImg, setDuckImg] = useState(null);
   const [clicked, setClicked] = useState(false);
   const hasFetched = useRef(false);
 
@@ -23,9 +23,10 @@ function DuckCard({ scoreUpdateHandler }) {
   }
 
   useEffect(() => {
-    if (hasFetched.current) return;
-    fetchDuckImg();
-    hasFetched.current = true;
+    if (!hasFetched.current) {
+      fetchDuckImg();
+      hasFetched.current = true;
+    }
   }, []);
 
   const handleClick = () => {
@@ -33,7 +34,6 @@ function DuckCard({ scoreUpdateHandler }) {
       setClicked(true);
       scoreUpdateHandler("raise");
     } else if (clicked === true) {
-      setClicked(false);
       scoreUpdateHandler("reset");
     }
   };
@@ -70,4 +70,4 @@ DuckCard.propTypes = {
   scoreUpdateHandler: PropTypes.func,
 };
 
-export { DuckCard };
+export default DuckCard;

@@ -1,4 +1,5 @@
-import { DuckCard } from "./DuckCard";
+import React from "react";
+import DuckCard from "./DuckCard";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 import "./CardsBoard.css";
@@ -20,4 +21,4 @@ CardsBoard.propTypes = {
   scoreUpdateHandler: PropTypes.func,
 };
 
-export { CardsBoard };
+export default React.memo(CardsBoard);

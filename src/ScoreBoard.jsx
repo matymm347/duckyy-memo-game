@@ -1,7 +1,15 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import "./ScoreBoard.css";
+import React from "react";
 
-function ScoreBoard({ currentScore, bestScore }) {
+function ScoreBoard({ currentScore }) {
+  const [bestScore, setBestScore] = useState(0);
+
+  if (bestScore < currentScore) {
+    setBestScore(currentScore);
+  }
+
   return (
     <>
       <div id="score-grid">

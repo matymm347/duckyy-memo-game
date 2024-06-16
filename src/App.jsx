@@ -1,27 +1,23 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { ScoreBoard } from "./ScoreBoard";
-import { CardsBoard } from "./CardsBoard";
+import CardsBoard from "./CardsBoard";
 
 function App() {
   const [currentScore, setCurrentScore] = useState(0);
-  const [bestScore, setBestScore] = useState(0);
 
-  function updateCurrentScore(type) {
-    if (type === "raise") {
+  const scoreUpdateHandler = useCallback((action) => {
+    if (action === "raise") {
       setCurrentScore(currentScore + 1);
-      if (currentScore > bestScore) {
-        setBestScore(currentScore);
-      }
-    } else if (type === "reset") {
+    } else if (action === "reset") {
       setCurrentScore(0);
     }
-  }
+  }, []);
 
   return (
     <>
       <div>
-        <ScoreBoard currentScore={currentScore} bestScore={bestScore} />
-        <CardsBoard cardCount={3} scoreUpdateHandler={updateCurrentScore} />
+        <ScoreBoard currentScore={currentScore} />
+        <CardsBoard cardCount={3} scoreUpdateHandler={scoreUpdateHandler} />
       </div>
     </>
   );

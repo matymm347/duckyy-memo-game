@@ -7,7 +7,7 @@ function App() {
 
   const scoreUpdateHandler = useCallback((action) => {
     if (action === "raise") {
-      setCurrentScore(currentScore + 1);
+      setCurrentScore((prevScore) => prevScore + 1);
     } else if (action === "reset") {
       setCurrentScore(0);
     }
@@ -17,7 +17,7 @@ function App() {
     <>
       <div>
         <ScoreBoard currentScore={currentScore} />
-        <CardsBoard cardCount={3} scoreUpdateHandler={scoreUpdateHandler} />
+        <CardsBoard cardCount={4} scoreUpdateHandler={scoreUpdateHandler} />
       </div>
     </>
   );

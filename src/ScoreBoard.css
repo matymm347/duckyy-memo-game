@@ -2,8 +2,6 @@
   display: grid;
   justify-items: center;
   grid-template-columns: 1fr 1fr;
-}
-
-.grid-element {
-  border: 1px solid white;
+  width: 200px;
+  margin-bottom: 50px;
 }

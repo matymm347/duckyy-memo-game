@@ -1,4 +1,4 @@
-import { React, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "./DuckCard.css";
 
@@ -79,6 +79,9 @@ function DuckCard({
 
 DuckCard.propTypes = {
   scoreUpdateHandler: PropTypes.func,
+  resetBroadcast: PropTypes.bool,
+  resetBoard: PropTypes.func,
+  shuffleArray: PropTypes.func,
 };
 
 export default DuckCard;

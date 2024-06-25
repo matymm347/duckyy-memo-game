@@ -2,9 +2,15 @@ import { React, useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "./DuckCard.css";
 
-function DuckCard({ scoreUpdateHandler, shuffleArray, resetHandler, clicked }) {
+function DuckCard({
+  scoreUpdateHandler,
+  shuffleArray,
+  resetBroadcast,
+  resetBoard,
+}) {
   const [duckImg, setDuckImg] = useState(null);
   const hasFetched = useRef(false);
+  const [clicked, setClicked] = useState(false);
 
   const apiKey = "EctaRGZPR0oVfEiBWP1Q1QHpVTwfgy1u";
   const tag = "duck";
@@ -35,9 +41,13 @@ function DuckCard({ scoreUpdateHandler, shuffleArray, resetHandler, clicked }) {
       shuffleArray();
     } else if (clicked === true) {
       scoreUpdateHandler("reset");
-      resetHandler();
+      resetBoard();
     }
   };
+
+  if (resetBroadcast === true && clicked === true) {
+    setClicked(false);
+  }
 
   let cardStyle = "";
 

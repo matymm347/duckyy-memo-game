@@ -17,8 +17,17 @@ function CardsBoard({ cardCount, scoreUpdateHandler }) {
     setDuckCardList(newArray);
   };
 
-  const resetHandler = () => {
-    // resetting all components using React.cloneElement
+  const resetBoard = () => {
+    setDuckCardList(
+      duckCardList.map((duckCard) =>
+        React.cloneElement(duckCard, { resetBroadcast: true })
+      )
+    );
+    // setDuckCardList(
+    //   duckCardList.map((duckCard) =>
+    //     React.cloneElement(duckCard, { resetBroadcast: false })
+    //   )
+    // );
   };
 
   const [duckCardList, setDuckCardList] = useState(
@@ -26,8 +35,8 @@ function CardsBoard({ cardCount, scoreUpdateHandler }) {
       <DuckCard
         scoreUpdateHandler={scoreUpdateHandler}
         shuffleArray={shuffleArray}
-        resetHandler={resetHandler}
-        clicked={false}
+        resetBoard={resetBoard}
+        resetBroadcast={false}
         key={uuidv4()}
       />
     ))
@@ -35,9 +44,7 @@ function CardsBoard({ cardCount, scoreUpdateHandler }) {
 
   return (
     <>
-      <div id="cards-board">
-        {duckCardList.map((duckCard) => duckCard.htmlCode)}
-      </div>
+      <div id="cards-board">{duckCardList}</div>
     </>
   );
 }

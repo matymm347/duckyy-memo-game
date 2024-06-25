@@ -17,7 +17,7 @@ function App() {
     <>
       <div>
         <ScoreBoard currentScore={currentScore} />
-        <CardsBoard cardCount={4} scoreUpdateHandler={scoreUpdateHandler} />
+        <CardsBoard cardCount={12} scoreUpdateHandler={scoreUpdateHandler} />
       </div>
     </>
   );

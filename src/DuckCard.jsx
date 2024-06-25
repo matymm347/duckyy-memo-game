@@ -32,7 +32,7 @@ function DuckCard({
       fetchDuckImg();
       hasFetched.current = true;
     }
-  }, []);
+  });
 
   const handleClick = () => {
     if (clicked === false) {

@@ -10,3 +10,7 @@
 .duck-img-not-clicked:hover {
   outline: 5px solid yellow;
 }
+
+.pi {
+  color: greenyellow;
+}
